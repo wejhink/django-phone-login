@@ -61,6 +61,15 @@ Coming Up...
 + [Django Rest Framework]
 
 
+# Customizable Fields in Settings.
+
+```python
+PHONE_LOGIN_MINUTES = 10
+PHONE_LOGIN_OTP_LENGTH = 6
+PHONE_LOGIN_OPT_HASH_ALGORITHM = 'sha256'
+```
+
+
 [django]: https://github.com/django/django
 [django-phonenumber-field]: https://github.com/stefanfoulis/django-phonenumber-field "Django PhoneNumber Field"
 [Django Rest Framework]: https://github.com/tomchristie/django-rest-framework

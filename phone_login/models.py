@@ -46,7 +46,7 @@ class PhoneToken(models.Model):
         today_max = datetime.datetime.combine(datetime.date.today(), datetime.time.max)
         otps = cls.objects.filter(phone_number=number, timestamp__range=(today_min, today_max))
         if otps.count() <= 10:
-            otp = cls.generate_otp(length=getattr(settings, 'OTP_LENGTH', 6))
+            otp = cls.generate_otp(length=getattr(settings, 'PHONE_LOGIN_OTP_LENGTH', 6))
             phone_token = PhoneToken(phone_number=number, otp=otp)
             phone_token.save()
             return phone_token
@@ -55,7 +55,7 @@ class PhoneToken(models.Model):
 
     @classmethod
     def generate_otp(cls, length=6):
-        hash_algorithm = getattr(settings, 'OTP_HASH_ALGORITHM', 'sha256')
+        hash_algorithm = getattr(settings, 'PHONE_LOGIN_OPT_HASH_ALGORITHM', 'sha256')
         m = getattr(hashlib, hash_algorithm)()
         m.update(getattr(settings, 'SECRET_KEY', None).encode('utf-8'))
         m.update(os.urandom(16))

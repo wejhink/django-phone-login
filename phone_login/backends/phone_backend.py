@@ -11,7 +11,7 @@ class PhoneBackend(ModelBackend):
         phone_token = PhoneToken.objects.filter(
             phone_number=phone_number,
             used=False,
-            timestamp__gte=datetime.datetime.now() - datetime.timedelta(minutes=100)
+            timestamp__gte=datetime.datetime.now() - datetime.timedelta(minutes=getattr(settings, 'PHONE_LOGIN_MINUTES', 10))
         ).first()
         if otp and phone_token and phone_token.otp == otp:
             User = get_user_model()
