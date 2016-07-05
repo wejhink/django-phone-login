@@ -16,11 +16,8 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 
-from phone_login import urls as otp_urls
-from phone_login.drf import urls as rest_urls
-
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^otp/', include(otp_urls)),
-    url(r'^api/', include(rest_urls)),
+    url(r'^otp/', include('phone_login.urls', namespace='phone_login'),),
+    url(r'^api/', include('phone_login.drf.urls', namespace='phone_login_drf')),
 ]
