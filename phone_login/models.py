@@ -55,7 +55,7 @@ class PhoneToken(models.Model):
 
     @classmethod
     def generate_otp(cls, length=6):
-        hash_algorithm = getattr(settings, 'PHONE_LOGIN_OPT_HASH_ALGORITHM', 'sha256')
+        hash_algorithm = getattr(settings, 'PHONE_LOGIN_OTP_HASH_ALGORITHM', 'sha256')
         m = getattr(hashlib, hash_algorithm)()
         m.update(getattr(settings, 'SECRET_KEY', None).encode('utf-8'))
         m.update(os.urandom(16))

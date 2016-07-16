@@ -1,11 +1,11 @@
 # Django Phone Login
 
 
-This login is basically used to login via OPT using `phone_number` as the new field instead of using `email` or `username` as the login.
+This login is basically used to login via OTP using `phone_number` as the new field instead of using `email` or `username` as the login.
 
 ## How does it work?
 
-We use [Twilio API to send the message][twilio-api-sms] to the phone and OPT and Verify it.
+We use [Twilio API to send the message][twilio-api-sms] to the phone and OTP and Verify it.
 
 You can ask the user for `phone_number` using Forms as authentication and login in any web browser. By sending the OTP.
 
@@ -66,7 +66,7 @@ Coming Up...
 ```python
 PHONE_LOGIN_MINUTES = 10
 PHONE_LOGIN_OTP_LENGTH = 6
-PHONE_LOGIN_OPT_HASH_ALGORITHM = 'sha256'
+PHONE_LOGIN_OTP_HASH_ALGORITHM = 'sha256'
 ```
 
 
