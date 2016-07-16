@@ -10,6 +10,8 @@ from django.contrib.auth.models import AbstractUser
 
 from phonenumber_field.modelfields import PhoneNumberField
 
+from .twilio_client import MessageClient
+
 
 class CustomUser(AbstractUser):
     phone_number = PhoneNumberField(unique=True)
@@ -49,6 +51,8 @@ class PhoneToken(models.Model):
             otp = cls.generate_otp(length=getattr(settings, 'PHONE_LOGIN_OTP_LENGTH', 6))
             phone_token = PhoneToken(phone_number=number, otp=otp)
             phone_token.save()
+            twilio_client = MessageClient()
+            message = twilio_client.send_message(body=otp, to=number)
             return phone_token
         else:
             return False
