@@ -7,6 +7,7 @@ import os
 from django.conf import settings
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.template.loader import render_to_string
 
 from phonenumber_field.modelfields import PhoneNumberField
 
@@ -52,7 +53,8 @@ class PhoneToken(models.Model):
             phone_token = PhoneToken(phone_number=number, otp=otp)
             phone_token.save()
             twilio_client = MessageClient()
-            message = twilio_client.send_message(body=otp, to=number)
+            message_text = render_to_string("otp_sms.txt", {"otp":otp})
+            message = twilio_client.send_message(body=message_text, to=number)
             return phone_token
         else:
             return False

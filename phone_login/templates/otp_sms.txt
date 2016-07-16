@@ -1,0 +1,1 @@
+Your one time password for login is {{ otp }}.
