@@ -12,6 +12,10 @@ You can ask the user for `phone_number` using Forms as authentication and login 
 Second, you can use `Django Rest Framework` and login like how Whatsapp, Viber and many login works.
 
 
+## Todo
+
++ Replace default twilio_client with [django-sendsms]
+
 ### Example.
 
 Add the Below `urls.py`
@@ -71,6 +75,7 @@ PHONE_LOGIN_OTP_HASH_ALGORITHM = 'sha256'
 
 
 [django]: https://github.com/django/django
+[django-sendsms]: https://github.com/stefanfoulis/django-sendsms
 [django-phonenumber-field]: https://github.com/stefanfoulis/django-phonenumber-field "Django PhoneNumber Field"
 [Django Rest Framework]: https://github.com/tomchristie/django-rest-framework
 [twilio-api-sms]: https://www.twilio.com/docs/api/rest/sending-messages
