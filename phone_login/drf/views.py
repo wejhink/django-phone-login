@@ -9,6 +9,8 @@ from django.contrib.auth import get_user_model, login, authenticate, logout
 
 from phone_login.models import PhoneToken
 
+from phone_login.utils import (failure, success,
+        unauthorized, too_many_requests, user_detail)
 
 @api_view(['POST'])
 @authentication_classes([])
@@ -18,12 +20,14 @@ def create_otp(request):
     if phone_number:
         token = PhoneToken.create_otp_for_number(phone_number)
         if token:
-            return Response({"status": "success"})
+            response, status = success()
+            return Response(response, status = status)
         else:
-            return Response({"status": "failure", "message": "Reached max limit for the day."})
+            response, status = too_many_requests()
+            return Response(response, status = status)
     else:
-        return Response({"statue": "failure"})
-
+        response, status = failure("Phone number is not given")
+        return Response(response, status = status)
 
 @api_view(['POST'])
 @authentication_classes([])
@@ -35,14 +39,18 @@ def check_otp(request):
     if user:
         last_login = user.last_login
         login(request, user)
-        return Response({"user_id": user.pk, "last_login": last_login, "status": "success", "token": user.auth_token.key})
+        response, status = user_detail(user, last_login)
+        return Response(response, status = status)
     else:
-        return Response({"status": "failure", "message": "invalid otp"})
+        response, status = failure("Invalid OTP")
+        return Response(response, status = status)
 
 
 @api_view(['GET'])
 def user_details(request):
     user = request.user
     if user.is_authenticated():
-        return Response({"user_id": user.pk, "last_login": user.last_login, "token": user.auth_token.key})
-    return Response({"status": "failure", "message": "User not logged in."})
+        response, status = user_detail(user, user.last_login)
+        return Response(response, status = status)
+    response, status = unauthorized()
+    return Response(response, status = status)
