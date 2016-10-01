@@ -31,4 +31,4 @@ class MessageClient(object):
               from_=self.twilio_number
             )
         except AttributeError:
-            print body
+            print(body)
