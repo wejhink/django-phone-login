@@ -12,7 +12,8 @@ from django.utils.translation import ugettext_lazy as _
 
 from phonenumber_field.modelfields import PhoneNumberField
 
-from .twilio_client import MessageClient
+from sendsms.message import SmsMessage
+
 
 class PhoneNumberAbstactUser(AbstractUser):
 
@@ -60,9 +61,11 @@ class PhoneToken(models.Model):
             otp = cls.generate_otp(length=getattr(settings, 'PHONE_LOGIN_OTP_LENGTH', 6))
             phone_token = PhoneToken(phone_number=number, otp=otp)
             phone_token.save()
-            twilio_client = MessageClient()
-            message_text = render_to_string("otp_sms.txt", {"otp":otp})
-            message = twilio_client.send_message(body=message_text, to=number)
+            message = SmsMessage(
+                            body=render_to_string("otp_sms.txt", {"otp":otp, "id":phone_token.id}),
+                            to=[number]
+                        )
+            message.send()
             return phone_token
         else:
             return False
