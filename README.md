@@ -10,8 +10,11 @@ This way you can use your favorite SMS Service.
 You can ask the user for `phone_number` using Forms as authentication and login in any web browser. By sending the OTP.
 Second, you can use `Django Rest Framework` and login like how Whatsapp, Viber and many login works.
 
+### Installation
 
-### Example.
+`pip install django-phone-login`
+
+### Instructions
 
 Add the Below `urls.py`
 
