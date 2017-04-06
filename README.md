@@ -5,16 +5,11 @@ This login is basically used to login via OTP using `phone_number` as the new fi
 
 ## How does it work?
 
-We use [Twilio API to send the message][twilio-api-sms] to the phone and OTP and Verify it.
-
+We use [django-sendsms][django-sendsms] to the phone and OTP and Verify it.
+This way you can use your favorite SMS Service.
 You can ask the user for `phone_number` using Forms as authentication and login in any web browser. By sending the OTP.
-
 Second, you can use `Django Rest Framework` and login like how Whatsapp, Viber and many login works.
 
-
-## Todo
-
-+ Replace default twilio_client with [django-sendsms]
 
 ### Example.
 
@@ -23,7 +18,6 @@ Add the Below `urls.py`
 ```python
 urlpatterns = [
     url(r'^otp/', include('phone_login.urls', namespace='phone_login'),),
-    url(r'^api/', include('phone_login.drf.urls', namespace='phone_login_drf')),
 ]
 ```
 
@@ -78,4 +72,3 @@ PHONE_LOGIN_OTP_HASH_ALGORITHM = 'sha256'
 [django-sendsms]: https://github.com/stefanfoulis/django-sendsms
 [django-phonenumber-field]: https://github.com/stefanfoulis/django-phonenumber-field "Django PhoneNumber Field"
 [Django Rest Framework]: https://github.com/tomchristie/django-rest-framework
-[twilio-api-sms]: https://www.twilio.com/docs/api/rest/sending-messages

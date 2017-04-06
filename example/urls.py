@@ -19,5 +19,4 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^otp/', include('phone_login.urls', namespace='phone_login'),),
-    url(r'^api/', include('phone_login.drf.urls', namespace='phone_login_drf')),
 ]

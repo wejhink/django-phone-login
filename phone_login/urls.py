@@ -1,8 +1,8 @@
 from django.conf.urls import url, include
 
-from .views import create_otp, check_otp
+from .views import GenerateOTP, ValidateOTP
 
 urlpatterns = [
-    url(r'^create_otp/$', create_otp, name="create_otp"),
-    url(r'^check_otp/$', check_otp, name="check_otp"),
+    url(r'^generate/$', GenerateOTP.as_view(), name="generate"),
+    url(r'^validate/$', ValidateOTP.as_view(), name="validate"),
 ]
