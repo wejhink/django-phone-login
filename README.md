@@ -23,7 +23,6 @@ Add the Below `urls.py`
 ```python
 urlpatterns = [
     url(r'^otp/', include('phone_login.urls', namespace='phone_login'),),
-    url(r'^api/', include('phone_login.drf.urls', namespace='phone_login_drf')),
 ]
 ```
 

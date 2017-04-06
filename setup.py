@@ -52,7 +52,7 @@ def get_package_data(package):
                           for filename in filenames])
     return {package: filepaths}
 
-REQUIREMENTS = [i.strip() for i in open("requirements.txt").readlines()]
+REQUIREMENTS = [i.strip() for i in open("requirements/requirements-mandatory.txt").readlines()]
 
 # allow setup.py to be run from any path
 os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))

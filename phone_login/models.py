@@ -8,14 +8,22 @@ from django.conf import settings
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.template.loader import render_to_string
+from django.utils.translation import ugettext_lazy as _
 
 from phonenumber_field.modelfields import PhoneNumberField
 
 from .twilio_client import MessageClient
 
+class PhoneNumberAbstactUser(AbstractUser):
 
-class CustomUser(AbstractUser):
     phone_number = PhoneNumberField(unique=True)
+
+    class Meta:
+        verbose_name = _('user')
+        verbose_name_plural = _('users')
+        abstract = True
+
+class CustomUser(PhoneNumberAbstactUser):
 
     REQUIRED_FIELDS = ['phone_number', 'email']
 
