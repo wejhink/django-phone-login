@@ -18,6 +18,8 @@ ISORT_ARGS = ['--recursive', '--check-only', '-o' 'uritemplate', '-p', 'tests', 
 
 sys.path.append(os.path.dirname(__file__))
 
+os.environ['DJANGO_SETTINGS_MODULE'] = 'tests.settings'
+
 
 def exit_on_failure(ret, message=None):
     if ret:
