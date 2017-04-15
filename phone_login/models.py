@@ -5,13 +5,11 @@ import hashlib
 import os
 
 from django.conf import settings
-from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.db import models
 from django.template.loader import render_to_string
 from django.utils.translation import ugettext_lazy as _
-
 from phonenumber_field.modelfields import PhoneNumberField
-
 from sendsms.message import SmsMessage
 
 
@@ -23,6 +21,7 @@ class PhoneNumberAbstactUser(AbstractUser):
         verbose_name = _('user')
         verbose_name_plural = _('users')
         abstract = True
+
 
 class CustomUser(PhoneNumberAbstactUser):
 
@@ -62,9 +61,12 @@ class PhoneToken(models.Model):
             phone_token = PhoneToken(phone_number=number, otp=otp)
             phone_token.save()
             message = SmsMessage(
-                            body=render_to_string("otp_sms.txt", {"otp":otp, "id":phone_token.id}),
-                            to=[number]
-                        )
+                body=render_to_string(
+                    "otp_sms.txt",
+                    {"otp": otp, "id": phone_token.id}
+                ),
+                to=[number]
+            )
             message.send()
             return phone_token
         else:

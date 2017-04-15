@@ -1,23 +1,16 @@
-import json
 
+from django.contrib.auth import authenticate, login
 from django.core.exceptions import ObjectDoesNotExist
-from django.shortcuts import render
 from rest_framework import status
-
-from rest_framework.decorators import api_view, authentication_classes
-from rest_framework.response import Response
 from rest_framework.generics import CreateAPIView
-
-from django.conf import settings
-from django.contrib.auth import get_user_model, login, authenticate, logout
+from rest_framework.response import Response
 
 from phone_login.models import PhoneToken
+from phone_login.utils import user_detail
 
-from phone_login.utils import (failure, success,
-        unauthorized, too_many_requests, user_detail)
+from .serializers import (PhoneTokenCreateSerializer,
+                          PhoneTokenValidateSerializer)
 
-
-from .serializers import PhoneTokenCreateSerializer, PhoneTokenValidateSerializer
 
 class GenerateOTP(CreateAPIView):
 
@@ -52,9 +45,11 @@ class ValidateOTP(CreateAPIView):
                 last_login = user.last_login
                 login(request, user)
                 response = user_detail(user, last_login)
-                return Response(response, status = status.HTTP_200_OK)
+                return Response(response, status=status.HTTP_200_OK)
             except ObjectDoesNotExist:
                 return Response(
-                {'reason': "OTP doesn't exist"}, status=status.HTTP_406_NOT_ACCEPTABLE)
+                    {'reason': "OTP doesn't exist"},
+                    status=status.HTTP_406_NOT_ACCEPTABLE
+                )
         return Response(
             {'reason': ser.errors}, status=status.HTTP_406_NOT_ACCEPTABLE)
