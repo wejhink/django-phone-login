@@ -1,14 +1,20 @@
 # Django Phone Login
 
+Django Phone Login provides phone number login with no additional passwords to remember.
+It's a easy way to grow your customer base. Without any hassle.
 
-This login is basically used to login via OTP using `phone_number` as the new field instead of using `email` or `username` as the login.
+## Why use django-phone-login?
 
-## How does it work?
++ Phone number login, no password required.
++ Registration through phone number.
++ Mobile based user authentication.
 
-We use [django-sendsms][django-sendsms] to the phone and OTP and Verify it.
-This way you can use your favorite SMS Service.
-You can ask the user for `phone_number` using Forms as authentication and login in any web browser. By sending the OTP.
-Second, you can use `Django Rest Framework` and login like how Whatsapp, Viber and many login works.
+# Flow
+1. User enter the `phone_number` and sends request to generate `secret code`.
+1. `django-phone-login` sends a `secret_code` as SMS to the phone number.
+1. User sends `secret_code` to the server to verify.
+1. `django-phone-login` verifies and send `token` as response using `DRF3`.
+
 
 ### Installation
 
@@ -49,6 +55,15 @@ AUTH_USER_MODEL = 'phone_login.CustomUser'
 AUTHENTICATION_BACKENDS = [
     'phone_login.backends.phone_backend.PhoneBackend',
     'django.contrib.auth.backends.ModelBackend'
+]
+
+# Make sure you also have backend Django Templates and APP_DIRS True, if you want to use default OTP Template.
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'APP_DIRS': True,
+        ...
+    },
 ]
 ```
 
