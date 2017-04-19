@@ -24,3 +24,10 @@ INSTALLED_APPS = [
 MIDDLEWARE_CLASSES = []
 
 SECRET_KEY = 'secretkey'
+
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'APP_DIRS': True
+    },
+]
