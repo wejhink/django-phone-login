@@ -12,11 +12,13 @@ PYTEST_ARGS = {
     'fast': ['tests', '--tb=short', '-q', '-s', '-rw'],
 }
 
-FLAKE8_ARGS = ['rest_framework', 'tests', '--ignore=E501']
+FLAKE8_ARGS = ['phone_login', 'tests', '--ignore=E501']
 
-ISORT_ARGS = ['--recursive', '--check-only', '-p', 'tests', 'rest_framework', 'tests']
+ISORT_ARGS = ['--recursive', '--check-only', '-o' 'uritemplate', '-p', 'tests', 'phone_login', 'tests']
 
 sys.path.append(os.path.dirname(__file__))
+
+os.environ['DJANGO_SETTINGS_MODULE'] = 'tests.settings'
 
 
 def exit_on_failure(ret, message=None):
@@ -97,7 +99,7 @@ if __name__ == "__main__":
                 '--cov-report',
                 'xml',
                 '--cov',
-                'rest_framework'] + pytest_args
+                'phone_login'] + pytest_args
 
         if first_arg.startswith('-'):
             # `runtests.py [flags]`

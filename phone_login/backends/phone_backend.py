@@ -2,15 +2,14 @@ import datetime
 import uuid
 
 from django.conf import settings
-from django.contrib.auth import get_user_model, login
+from django.contrib.auth import get_user_model
 from django.contrib.auth.backends import ModelBackend
-from django.core.exceptions import ObjectDoesNotExist
 
-from ..utils import model_field_attr
 from ..models import PhoneToken
+from ..utils import model_field_attr
+
 
 class PhoneBackend(ModelBackend):
-
 
     def __init__(self, *args, **kwargs):
         self.user_model = get_user_model()
@@ -29,13 +28,13 @@ class PhoneBackend(ModelBackend):
         # 2. Check if phone_token and otp are same, within the given time range
         try:
             phone_token = PhoneToken.objects.get(
-                pk = pk,
-                otp = otp,
+                pk=pk,
+                otp=otp,
                 used=False,
                 timestamp__gte=datetime.datetime.now() - datetime.timedelta(minutes=getattr(settings, 'PHONE_LOGIN_MINUTES', 10))
             )
         except PhoneToken.DoesNotExist:
-            phone_token =  PhoneToken.objects.get(pk=pk)
+            phone_token = PhoneToken.objects.get(pk=pk)
             phone_token.attempts = phone_token.attempts + 1
             phone_token.save()
             raise PhoneToken.DoesNotExist
