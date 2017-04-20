@@ -1,4 +1,11 @@
 *.pyc
+.coverage.*
+__pycache__
+.cache
+docs/_*
+build
+dist
+
 *.db
 *.sqlite3
 *~

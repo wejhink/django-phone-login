@@ -1,2 +1,5 @@
 # MkDocs to build our documentation.
 mkdocs==0.15.3
+recommonmark>=0.4.0
+Sphinx>=1.5.5
+sphinx_rtd_theme>=0.2.4
