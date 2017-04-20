@@ -15,6 +15,7 @@ except ImportError:
     def read_md(f):
         return open(f, 'r').read()
 
+version = __import__('phone_login').__version__
 
 
 # Provided as an attribute, so you can append to these instead
@@ -58,7 +59,7 @@ os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 setup(
     name='django-phone-login',
-    version='1.0',
+    version=version,
     include_package_data=True,
     license='BSD License',
     description='Django Phone Login: Login with OTP',
