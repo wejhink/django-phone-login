@@ -1,3 +1,10 @@
+
+import os
+
+# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+SECRET_KEY = 'secretkey'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -21,9 +28,27 @@ INSTALLED_APPS = [
     'tests',
 ]
 
-MIDDLEWARE_CLASSES = []
 
-SECRET_KEY = 'secretkey'
+AUTH_USER_MODEL = 'phone_login.CustomUser'
+
+MIDDLEWARE_CLASSES = [
+    'django.middleware.security.SecurityMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
+
+AUTHENTICATION_BACKENDS = [
+    'phone_login.backends.phone_backend.PhoneBackend',
+    'django.contrib.auth.backends.ModelBackend'
+]
+
+ROOT_URLCONF = 'tests.urls'
+
 
 TEMPLATES = [
     {

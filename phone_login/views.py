@@ -37,12 +37,12 @@ class ValidateOTP(CreateAPIView):
         # Get the patient if present or result None.
         ser = self.serializer_class(data=request.data, context={'request': request})
         if ser.is_valid():
-
             pk = request.data.get("pk")
             otp = request.data.get("otp")
             try:
                 user = authenticate(pk=pk, otp=otp)
-                last_login = user.last_login
+                if user:
+                    last_login = user.last_login
                 login(request, user)
                 response = user_detail(user, last_login)
                 return Response(response, status=status.HTTP_200_OK)
