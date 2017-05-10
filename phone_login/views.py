@@ -19,10 +19,17 @@ class GenerateOTP(CreateAPIView):
 
     def post(self, request, format=None):
         # Get the patient if present or result None.
-        ser = self.serializer_class(data=request.data, context={'request': request})
+        ser = self.serializer_class(
+            data=request.data,
+            context={'request': request}
+        )
         if ser.is_valid():
-            token = PhoneToken.create_otp_for_number(request.data.get('phone_number'))
-            phone_token = self.serializer_class(token, context={'request': request})
+            token = PhoneToken.create_otp_for_number(
+                request.data.get('phone_number')
+            )
+            phone_token = self.serializer_class(
+                token, context={'request': request}
+            )
             return Response(phone_token.data)
         return Response(
             {'reason': ser.errors}, status=status.HTTP_406_NOT_ACCEPTABLE)
@@ -35,7 +42,9 @@ class ValidateOTP(CreateAPIView):
 
     def post(self, request, format=None):
         # Get the patient if present or result None.
-        ser = self.serializer_class(data=request.data, context={'request': request})
+        ser = self.serializer_class(
+            data=request.data, context={'request': request}
+        )
         if ser.is_valid():
             pk = request.data.get("pk")
             otp = request.data.get("otp")
