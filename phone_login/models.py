@@ -66,17 +66,6 @@ class PhoneNumberAbstactUser(AbstractUser):
         abstract = True
 
 
-class CustomUser(PhoneNumberAbstactUser):
-
-    REQUIRED_FIELDS = ['phone_number', 'email']
-
-    def __str__(self):
-        return self.username
-
-    def __unicode__(self):
-        return self.username
-
-
 class PhoneToken(models.Model):
 
     phone_number = PhoneNumberField(editable=False)

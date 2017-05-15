@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.test import TransactionTestCase
 
-from phone_login.models import CustomUser
+from .models import CustomUser
 
 """
 Checking with various custom users.

@@ -29,7 +29,7 @@ INSTALLED_APPS = [
 ]
 
 
-AUTH_USER_MODEL = 'phone_login.CustomUser'
+AUTH_USER_MODEL = 'tests.CustomUser'
 
 MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
