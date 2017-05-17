@@ -1,4 +1,4 @@
-Djanog Phone Login
+Django Phone Login
 =================================
 
 **Password Free Authentication System**
