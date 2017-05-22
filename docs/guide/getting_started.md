@@ -39,7 +39,6 @@ REST_FRAMEWORK = {
 }
 
 
-AUTH_USER_MODEL = 'phone_login.CustomUser'
 
 AUTHENTICATION_BACKENDS = [
     'phone_login.backends.phone_backend.PhoneBackend',
