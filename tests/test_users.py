@@ -1,5 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.test import TransactionTestCase
+from django.db import IntegrityError
 
 from .models import CustomUser
 
@@ -25,3 +26,27 @@ class PhoneTokenTest(TransactionTestCase):
         self.assertIsNotNone(user)
         self.assertEqual(CustomUser.objects.count(), 1)
         self.assertEqual(User.objects.count(), CustomUser.objects.count())
+
+    """
+    We check giving the same number with 2 different formats.
+    If the number already exist, the second time the user is being created.
+    It must give an error.
+    """
+    def test_phone_number_equals(self):
+        phone_number = "+1 (860) 922-9292"
+        phone_same_number = "+1 860922-9292"
+        user = User.objects.create_user(
+            phone_number=phone_number,
+            username="iraycd",
+            password="random-password"
+        )
+        self.assertIsNotNone(user)
+        with self.assertRaises(IntegrityError):
+            User.objects.create_user(
+                phone_number=phone_same_number,
+                username="iraycd2",
+                password="random-password"
+            )
+        self.assertEqual(user.phone_number, phone_number)
+        self.assertEqual(user.phone_number, phone_same_number)
+        self.assertEqual(CustomUser.objects.count(), 1)
