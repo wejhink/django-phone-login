@@ -1,5 +1,5 @@
 [![Documentation Status](https://readthedocs.org/projects/django-phone-login/badge/?version=latest)](http://django-phone-login.readthedocs.io/en/latest/?badge=latest)
-
+[![Build Status](https://travis-ci.org/wejhink/django-phone-login.png?branch=master)](https://travis-ci.org/wejhink/django-phone-login)
 
 # Django Phone Login
 
