@@ -1,19 +1,17 @@
-
+from django.conf import settings
 from django.contrib.auth import authenticate, login
 from django.core.exceptions import ObjectDoesNotExist
 from rest_framework import status
 from rest_framework.generics import CreateAPIView
 from rest_framework.response import Response
 
-from phone_login.models import PhoneToken
-from phone_login.utils import user_detail
-
+from .models import PhoneToken
 from .serializers import (PhoneTokenCreateSerializer,
                           PhoneTokenValidateSerializer)
+from .utils import user_detail
 
 
 class GenerateOTP(CreateAPIView):
-
     queryset = PhoneToken.objects.all()
     serializer_class = PhoneTokenCreateSerializer
 
@@ -27,16 +25,19 @@ class GenerateOTP(CreateAPIView):
             token = PhoneToken.create_otp_for_number(
                 request.data.get('phone_number')
             )
-            phone_token = self.serializer_class(
-                token, context={'request': request}
-            )
-            return Response(phone_token.data)
+            if token:
+                phone_token = self.serializer_class(
+                    token, context={'request': request}
+                )
+                return Response(phone_token.data)
+            return Response({
+                'reason': "you can not have more than {n} attempts per day, please try again tomorrow".format(
+                    n=getattr(settings, 'PHONE_LOGIN_ATTEMPTS', 10))}, status=status.HTTP_403_FORBIDDEN)
         return Response(
             {'reason': ser.errors}, status=status.HTTP_406_NOT_ACCEPTABLE)
 
 
 class ValidateOTP(CreateAPIView):
-
     queryset = PhoneToken.objects.all()
     serializer_class = PhoneTokenValidateSerializer
 

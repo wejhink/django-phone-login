@@ -1,7 +1,7 @@
 from django.test import TransactionTestCase
 
-from phone_login.models import PhoneToken
 from phone_login.backends.phone_backend import PhoneBackend
+from phone_login.models import PhoneToken
 
 
 class PhoneBackendTest(TransactionTestCase):

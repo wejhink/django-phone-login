@@ -13,13 +13,26 @@
 # All configuration values have a default; values that are commented out
 # serve to show the default.
 
-# If extensions (or modules to document with autodoc) are in another directory,
-# add these directories to sys.path here. If the directory is relative to the
+sys.path.insert(0, os.path.abspath('../'))
+
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
 import os
+# If extensions (or modules to document with autodoc) are in another directory,
+# add these directories to sys.path here. If the directory is relative to the
 import sys
-sys.path.insert(0, os.path.abspath('../'))
+
+# The theme to use for HTML and HTML Help pages.  See the documentation for
+# a list of builtin themes.
+#
+import sphinx_rtd_theme
+from recommonmark.parser import CommonMarkParser
+
+# The version info for the project you're documenting, acts as replacement for
+# |version| and |release|, also used in various other places throughout the
+# built documents.
+#
+import phone_login
 
 # -- General configuration ------------------------------------------------
 
@@ -44,7 +57,6 @@ templates_path = ['_templates']
 # source_suffix = ['.rst', '.md']
 # source_suffix = '.rst'
 
-from recommonmark.parser import CommonMarkParser
 
 source_parsers = {
     '.md': CommonMarkParser,
@@ -60,11 +72,6 @@ project = 'django-phone-login'
 copyright = '2017, Ray Ch'
 author = 'Ray Ch'
 
-# The version info for the project you're documenting, acts as replacement for
-# |version| and |release|, also used in various other places throughout the
-# built documents.
-#
-import phone_login
 # The short X.Y version.
 version = phone_login.__version__
 # The full version, including alpha/beta/rc tags.
@@ -91,10 +98,6 @@ todo_include_todos = False
 
 # -- Options for HTML output ----------------------------------------------
 
-# The theme to use for HTML and HTML Help pages.  See the documentation for
-# a list of builtin themes.
-#
-import sphinx_rtd_theme
 
 html_theme = "sphinx_rtd_theme"
 

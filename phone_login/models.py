@@ -56,7 +56,6 @@ class PhoneNumberUserManager(BaseUserManager):
 
 
 class PhoneNumberAbstactUser(AbstractUser):
-
     phone_number = PhoneNumberField(unique=True)
     objects = PhoneNumberUserManager()
 
@@ -67,7 +66,6 @@ class PhoneNumberAbstactUser(AbstractUser):
 
 
 class PhoneToken(models.Model):
-
     phone_number = PhoneNumberField(editable=False)
     otp = models.CharField(max_length=40, editable=False)
     timestamp = models.DateTimeField(auto_now_add=True, editable=False)
