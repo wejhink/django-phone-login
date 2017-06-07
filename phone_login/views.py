@@ -50,7 +50,7 @@ class ValidateOTP(CreateAPIView):
             pk = request.data.get("pk")
             otp = request.data.get("otp")
             try:
-                user = authenticate(pk=pk, otp=otp)
+                user = authenticate(request, pk=pk, otp=otp)
                 if user:
                     last_login = user.last_login
                 login(request, user)

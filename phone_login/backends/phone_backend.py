@@ -10,7 +10,6 @@ from ..utils import model_field_attr
 
 
 class PhoneBackend(ModelBackend):
-
     def __init__(self, *args, **kwargs):
         self.user_model = get_user_model()
 
@@ -22,7 +21,7 @@ class PhoneBackend(ModelBackend):
         """
         return str(uuid.uuid4())[:model_field_attr(
             self.user_model, 'username', 'max_length')
-        ]
+               ]
 
     def create_user(self, phone_token, **extra_fields):
         """
@@ -45,7 +44,7 @@ class PhoneBackend(ModelBackend):
         )
         return user
 
-    def authenticate(self, pk=None, otp=None, **extra_fields):
+    def authenticate(self, request, pk=None, otp=None, **extra_fields):
 
         # 1. Validating the PhoneToken with PK and OTP.
         # 2. Check if phone_token and otp are same, within the given time range
