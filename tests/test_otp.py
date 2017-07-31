@@ -5,6 +5,7 @@ from django.test import TransactionTestCase
 
 from phone_login.models import PhoneToken
 
+
 # Here is where we check the Creation and Generation of OTP.
 #
 # Creating and Validating OTP
