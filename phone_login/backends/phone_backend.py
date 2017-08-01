@@ -21,7 +21,7 @@ class PhoneBackend(ModelBackend):
         """
         return str(uuid.uuid4())[:model_field_attr(
             self.user_model, 'username', 'max_length')
-               ]
+        ]
 
     def create_user(self, phone_token, **extra_fields):
         """

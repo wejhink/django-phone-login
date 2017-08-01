@@ -22,17 +22,16 @@ import os
 # add these directories to sys.path here. If the directory is relative to the
 import sys
 
-# The theme to use for HTML and HTML Help pages.  See the documentation for
-# a list of builtin themes.
-#
-import sphinx_rtd_theme
-from recommonmark.parser import CommonMarkParser
-
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
 # built documents.
 #
 import phone_login
+# The theme to use for HTML and HTML Help pages.  See the documentation for
+# a list of builtin themes.
+#
+import sphinx_rtd_theme
+from recommonmark.parser import CommonMarkParser
 
 # -- General configuration ------------------------------------------------
 

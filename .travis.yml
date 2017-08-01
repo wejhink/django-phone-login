@@ -6,5 +6,8 @@ env:
   - DJANGO_VERSION=1.11
 install:
   - pip install -q Django==$DJANGO_VERSION
+  - pip install -r requirements/requirements-mandatory.txt
+  - pip install -r requirements/requirements-testing.txt
+  - pip install djangorestframework
   - python setup.py -q install
 script: ./runtests.py

@@ -1,5 +1,4 @@
-from django.test import TransactionTestCase
-from django.test import TestCase, RequestFactory
+from django.test import RequestFactory, TransactionTestCase
 
 from phone_login.backends.phone_backend import PhoneBackend
 from phone_login.models import PhoneToken
