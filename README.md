@@ -1,4 +1,5 @@
-[![Build Status](https://travis-ci.org/wejhink/django-phone-login.png?branch=master)](https://travis-ci.org/wejhink/django-phone-login)
+[![build-status-image]][travis]
+[![pypi-version]][pypi]
 
 # Django Phone Login
 
@@ -93,3 +94,9 @@ PHONE_LOGIN_OTP_HASH_ALGORITHM = 'sha256'
 + Phone number login, no password required.
 + Registration through phone number.
 + Mobile based user authentication.
+
+
+[build-status-image]: https://secure.travis-ci.org/wejhink/django-phone-login.svg?branch=master
+[travis]: http://travis-ci.org/wejhink/django-phone-login?branch=master
+[pypi-version]: https://img.shields.io/pypi/v/django-phone-login.svg
+[pypi]: https://pypi.python.org/pypi/django-phone-login
