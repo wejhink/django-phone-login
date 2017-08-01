@@ -14,7 +14,7 @@ PYTEST_ARGS = {
 
 FLAKE8_ARGS = ['phone_login', 'tests', '--ignore=E501']
 
-ISORT_ARGS = ['--recursive', '--check-only', '-o' 'uritemplate', '-p', 'tests', 'phone_login', 'tests']
+ISORT_ARGS = ['--recursive', '--check-only', '-p', 'tests', 'phone_login']
 
 sys.path.append(os.path.dirname(__file__))
 

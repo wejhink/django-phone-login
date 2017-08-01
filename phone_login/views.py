@@ -6,8 +6,9 @@ from rest_framework.generics import CreateAPIView
 from rest_framework.response import Response
 
 from .models import PhoneToken
-from .serializers import (PhoneTokenCreateSerializer,
-                          PhoneTokenValidateSerializer)
+from .serializers import (
+    PhoneTokenCreateSerializer, PhoneTokenValidateSerializer
+)
 from .utils import user_detail
 
 
