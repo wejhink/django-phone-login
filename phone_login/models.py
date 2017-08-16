@@ -90,12 +90,14 @@ class PhoneToken(models.Model):
             otp = cls.generate_otp(length=getattr(settings, 'PHONE_LOGIN_OTP_LENGTH', 6))
             phone_token = PhoneToken(phone_number=number, otp=otp)
             phone_token.save()
+            from_phone = getattr(settings, 'SENDSMS_FROM_NUMBER')
             message = SmsMessage(
                 body=render_to_string(
                     "otp_sms.txt",
                     {"otp": otp, "id": phone_token.id}
                 ),
                 to=[number]
+                from_phone = from_phone
             )
             message.send()
             return phone_token
