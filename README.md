@@ -3,6 +3,8 @@
 
 # Django Phone Login
 
+Django-phone-login uses django-sendsms to send sms.
+
 Django Phone Login provides phone number login with no additional passwords to remember.
 It's a easy way to grow your customer base. Without any hassle.
 
@@ -60,6 +62,15 @@ TEMPLATES = [
         ...
     },
 ]
+
+
+Configure the SENDSMS_BACKEND (defaults to 'sendsms.backends.console.SmsBackend')
+
+SENDSMS_BACKEND = 'myapp.mysmsbackend.SmsBackend'
+SENDSMS_FROM_NUMBER = "+XXxxxxxxxxxx" 
+SENDSMS_ACCOUNT_SID = 'ACXXXXXXXXXXXXXX'
+SENDSMS_AUTH_TOKEN = 'xxxxxxxx' 
+
 ```
 
 ## Adding to URLs
