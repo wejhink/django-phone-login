@@ -96,8 +96,9 @@ class PhoneToken(models.Model):
                     "otp_sms.txt",
                     {"otp": otp, "id": phone_token.id}
                 ),
+                from_phone = from_phone,
                 to=[number]
-                from_phone = from_phone
+
             )
             message.send()
             return phone_token
