@@ -56,3 +56,6 @@ TEMPLATES = [
         'APP_DIRS': True
     },
 ]
+
+
+SENDSMS_FROM_NUMBER = '+15005550006'
