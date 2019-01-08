@@ -30,7 +30,10 @@ class GenerateOTP(CreateAPIView):
                 phone_token = self.serializer_class(
                     token, context={'request': request}
                 )
-                return Response(phone_token.data)
+                data = phone_token.data
+                if getattr(settings, 'PHONE_LOGIN_DEBUG', False):
+                    data['debug'] = token.otp
+                return Response(data)
             return Response({
                 'reason': "you can not have more than {n} attempts per day, please try again tomorrow".format(
                     n=getattr(settings, 'PHONE_LOGIN_ATTEMPTS', 10))}, status=status.HTTP_403_FORBIDDEN)
