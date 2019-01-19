@@ -52,6 +52,8 @@ class PhoneBackend(ModelBackend):
         return user
 
     def authenticate(self, request, pk=None, otp=None, **extra_fields):
+        if pk is None:
+            return
 
         # 1. Validating the PhoneToken with PK and OTP.
         # 2. Check if phone_token and otp are same, within the given time range

@@ -89,6 +89,7 @@ urlpatterns = [
 PHONE_LOGIN_ATTEMPTS = 10
 PHONE_LOGIN_OTP_LENGTH = 6
 PHONE_LOGIN_OTP_HASH_ALGORITHM = 'sha256'
+PHONE_LOGIN_DEBUG = True  # will include otp in generate response, default is False.
 ```
 
 
